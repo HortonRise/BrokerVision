@@ -109,7 +109,7 @@ if (isset($_GET['a'])) {
         $escalationWeight = $auctionData["escalationWeight"] / 10;
         $termWeight       = $auctionData["termWeight"] / 10;
 
-        $weights[] = Array(
+        $weights = Array(
                   "price" => $auctionData["priceWeight"] / 100,
                   "TI" => $auctionData["TIWeight"] / 100,
                   "FR" => $auctionData["FRWeight"] / 100,
