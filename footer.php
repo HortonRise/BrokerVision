@@ -1,7 +1,8 @@
 </div>
-<div class="sideNav">
 
-</div>
+<?php
+  include "sidenav.php";
+ ?>
 
 </body>
 </html>
