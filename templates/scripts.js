@@ -1,18 +1,12 @@
 $( document ).ready(function() {
+  if (typeof auctionID !== 'undefined') {
     getData();
     leftNavHover();
     setTimeout(function(){
 
         updatePage();
     }, 2000);
-
-
-    // setTimeout(function(){
-    //     adjustClock();
-    // }, 500);
-
-    //JSON
-    //getData();
+}
 });
 
 ///////END DOC READY
