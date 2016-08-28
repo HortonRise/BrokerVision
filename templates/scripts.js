@@ -1,26 +1,24 @@
 $( document ).ready(function() {
 
 
+
     setTimeout(function(){
         updatePage();
     }, 2000);
 
-    setTimeout(function(){
-        $('.ring1').css('opacity', '1');
-        moveClock(60000);
-        displayClock(60000);
-    }, 500);
-
+    // setTimeout(function(){
+    //     adjustClock();
+    // }, 500);
 
     //JSON
     //getData();
-
 });
 
 ///////END DOC READY
 
-
 var dataObj;
+var myTimer;
+var myTimer2;
 //JSON GET
 function getData() {
     $.get( "../getbids.php?a=1", function( data ) {
@@ -29,6 +27,7 @@ function getData() {
        var testJson = jQuery.parseJSON(newJSON);
        dataObj = testJson[0];
 
+       updatePage();
        console.log(dataObj);
     });
     setTimeout(function(){
@@ -38,8 +37,14 @@ function getData() {
 
 getData();
 
-
 function moveClock(time){
+    // $(".ring1").css('transition','transform 0s linear');
+    // $(".ring2").css('transition','transform 0s linear');
+    //
+    // $(".ring1").css('transform','rotate(0deg)');
+    // $(".ring2").css('transform','rotate(180deg)');
+
+
     $(".ring1").css('transition','transform ' + (time/2000) + 's linear');
     $(".ring2").css('transition','transform ' + (time/2000) + 's linear');
     $(".mask1").css('transition','all ' + (time/2000) + 's linear');
@@ -51,7 +56,7 @@ function moveClock(time){
 
     var timeTillHalf = (time/2)+10;
 
-    setTimeout(function(){
+    myTimer2 = setTimeout(function(){
         $(".ring2").css('opacity','1');
         $(".mask1").css('display','none');
         $(".ring2").css('transform','rotate(360deg)');
@@ -60,8 +65,11 @@ function moveClock(time){
 
 function displayClock(time){
 
-    var seconds = Math.round((time/1000)%60);
-    var minutes = Math.round(time/60000);
+    var seconds = 0;
+    var minutes = 0;
+
+    seconds = Math.round((time/1000)%60);
+    minutes = Math.round(time/60000);
 
 
     var min = 0;
@@ -77,13 +85,9 @@ function displayClock(time){
     setTimeout(function(){
         tickDown(minutes, seconds);
     }, 1000);
-
-
 }
 
-
 function tickDown(minutes, seconds){
-
 
     if(seconds!==0){
         seconds--;
@@ -94,27 +98,27 @@ function tickDown(minutes, seconds){
         }
     };
 
-
     if(seconds<10 && seconds>-1){
         $('.clockNumbers').html(minutes + ":0" + seconds);
     }else{
         $('.clockNumbers').html(minutes + ":" + seconds);
     }
 
-
     if(seconds!==0 || minutes!==0){
-        setTimeout( function(){
+        myTimer = setTimeout( function(){
             tickDown(minutes, seconds);
         },1000);
 
     }else{
         //do nothing
         $('.clockNumbers').css('color','red');
+        $('.clockNumbers').css('color','red');
+        $('.ring1').css('border','4px red solid');
+        $('.ring2').css('border','4px red solid');
     }
 }
 
 //////END CLOCK
-
 
 
 //VERTICAL BAR GRAPHS
@@ -145,11 +149,8 @@ function updateGraph(graphNum){
         var transformedVal = currentObj[j].percent;
         //console.log(transformedVal);
 
-
-
         $(barFullClass).css('height', transformedVal);
         $(valFullClass).html(currentObj[j].value);
-
 
     };
 
@@ -157,7 +158,6 @@ function updateGraph(graphNum){
     $(prefFullClass).css('opacity', prefWeight);
     $(prefFullValClass).html((prefWeight*100) + "%");
 }
-
 
 //TOP SUMMARY AND FACTS
 
@@ -192,11 +192,17 @@ function updateFacts(){
         var propFactNumId = propFactId + " .propFact1 .factNum";
         var propFact2NumId = propFactId + " .propFact2 .factNum";
 
+        var propNameAndSq = propFactId + " .propName";
+
+        $(propNameAndSq).html(dataObj.score[l].title + "<span style='font-weight:300;font-size:13px;'>  &#124;  " + dataObj.score[l].title + "</span>")
+
         $(propFactNumId).html(dataObj.score[l].value);
         $(propFact2NumId).html(dataObj.netvalue[l].tinyV);
 
     }
 }
+
+var lastTimeStamp = 0;
 
 function updatePage(){
 
@@ -207,8 +213,38 @@ function updatePage(){
         updateGraph(m);
     }
 
-    setTimeout(function(){
-        updatePage();
-    }, 2000);
+    if(lastTimeStamp !== dataObj.lastUpdate){
+        clearTimeout(myTimer);
+        clearTimeout(myTimer2);
 
+        $('.clockNumbers').css('color','white');
+
+        $(".ring1").css('transition','transform 0s linear');
+        $(".ring2").css('transition','transform 0s linear');
+
+        $('.ring1').css('border','4px white solid');
+        $('.ring2').css('border','4px white solid');
+
+        $(".ring2").css('opacity','0');
+        $(".mask1").css('display','block');
+
+        $(".ring1").css('transform','rotate(0deg)');
+        $(".ring2").css('transform','rotate(180deg)');
+
+        myTimer = setTimeout(function(){
+            adjustClock();
+        }, 1000);
+        lastTimeStamp = dataObj.lastUpdate
+        console.log(lastTimeStamp);
+    }
+
+    // setTimeout(function(){
+    //     updatePage();
+    // }, 2000);
+}
+
+function adjustClock (){
+    $('.ring1').css('opacity', '1');
+    moveClock(6000);
+    displayClock(6000);
 }
