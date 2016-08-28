@@ -5,6 +5,11 @@ RewriteRule    ^auction/?$    auctions.php    [NC,L]
 RewriteRule    ^auction/newbid?$    newbid.php    [NC,L]
 RewriteRule    ^auction/getbids/([0-9]+)/?([A-Za-z0-9-]*)$  getbids.php?a=$1   [NC,L]    # Handle property requests
 RewriteRule    ^auction/new?$    editauction.php    [NC,L]
+RewriteRule    ^auction/edit/([0-9]+)/?([A-Za-z0-9-]*)$  editauction.php?a=$1   [NC,L]    # Handle auction requests
 RewriteRule    ^logout/?$    logout.php    [NC,L]
 RewriteRule    ^property/([0-9]+)/?([A-Za-z0-9-]*)$  propertydetail.php?p=$1   [NC,L]    # Handle property requests
 RewriteRule    ^auction/([0-9]+)/?([A-Za-z0-9-]*)$  auctiondetail.php?a=$1   [NC,L]    # Handle auction requests
+
+<IfModule !fcgid_module>
+php_value date.timezone "America/Chicago"
+</IfModule>

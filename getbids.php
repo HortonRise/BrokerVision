@@ -49,7 +49,7 @@ if (isset($_GET['a'])) {
               "escalation" => $auctionData["escalationWeight"] / 100,
               "term" => $auctionData["termWeight"] / 100,
     );
-
+    $lastUpdate = $auctionData['lastUpdate'];
     $maxScore = $priceWeight + $TIWeight + $FRWeight + $escalationWeight + $termWeight;
 
     //Pull out the most up to date bids for a specified auction
@@ -185,7 +185,8 @@ if (isset($_GET['a'])) {
             "term" => $term,
             "score" => $score,
             "netvalue" => $netvalue,
-            "weights" => $weights
+            "weights" => $weights,
+            "lastUpdate" => $lastUpdate
         );
         header('Content-Type: application/json');
         echo json_encode($results, JSON_PRETTY_PRINT);

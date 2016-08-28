@@ -6,9 +6,9 @@ include "header.php";
 <h1>Auction</h1>
 <?php
 $id = $_GET['a'];
-
 if ($loggedIn) {
     if (isset($id)) {
+      echo $id;
         //Get Auction Data
         $query  = "SELECT *
                 FROM auctions
