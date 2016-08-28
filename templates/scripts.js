@@ -1,10 +1,12 @@
 $( document ).ready(function() {
 
 
-
+    leftNavHover();
     setTimeout(function(){
+
         updatePage();
     }, 2000);
+
 
     // setTimeout(function(){
     //     adjustClock();
@@ -247,4 +249,21 @@ function adjustClock (){
     $('.ring1').css('opacity', '1');
     moveClock(10000);
     displayClock(10000);
+}
+
+function navHover() {
+    for(var d=0;d<4;d++){
+        var navClass = ".navItem" + d;
+        $(navClass).hover(function(){
+
+        })
+    }
+
+}
+
+var pageNum = 1;
+function leftNavHover(){
+    if(pageNum==1){
+        $(".navItem2").addClass('hover2');
+    }
 }

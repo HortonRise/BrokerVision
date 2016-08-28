@@ -589,9 +589,70 @@ a
     height 80px
     text-align center
     display block
-    img
+    position relative
+    // img
+    //     width 27px
+    //     margin 0px auto
+    .navImage
         width 27px
-        margin 0px auto
+        height 27px
+
+.navImg
+    width 27px
+    height 27px
+    margin 0px auto
+    display block
+    background-size cover
+
+.navItem
+    .navImg1
+        background-image url('assets/dashboard.png')
+    .navImg2
+        background-image url('assets/liveauctions.png')
+    .navImg3
+        background-image url('assets/properties.png')
+    .navImg4
+        background-image url('assets/addauction.png')
+    &:hover
+        .navImg1
+            background-image url('assets/dashboardorange.png')
+        .navImg2
+            background-image url('assets/liveauctionsorange.png')
+        .navImg3
+            background-image url('assets/propertiesorange.png')
+        .navImg4
+            background-image url('assets/addauctionorange.png')
+        .navName
+            color #ffa202
+
+.hover1
+    .navImg1
+        background-image url('assets/dashboardorange.png')
+    .navName
+        color #ffa202
+
+.hover2
+    .navImg2
+        background-image url('assets/liveauctionsorange.png')
+    .navName
+        color #ffa202
+
+.hover3
+    .navImg3
+        background-image url('assets/propertiesorange.png')
+    .navName
+        color #ffa202
+
+.hover3
+    .navImg4
+        background-image url('assets/addauctionorange.png')
+    .navName
+        color #ffa202
+
+// .navImg1
+//     background-image url('assets/dashboard.png')
+//     &:hover
+//         background-image url('assets/dashboardorange.png')
 
 .tLogo
     margin-bottom 10px
