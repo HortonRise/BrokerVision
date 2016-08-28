@@ -1,19 +1,12 @@
 $( document ).ready(function() {
-
-
+  if (typeof auctionID !== 'undefined') {
+    getData();
     leftNavHover();
     setTimeout(function(){
 
         updatePage();
     }, 2000);
-
-
-    // setTimeout(function(){
-    //     adjustClock();
-    // }, 500);
-
-    //JSON
-    //getData();
+}
 });
 
 ///////END DOC READY
@@ -21,12 +14,16 @@ $( document ).ready(function() {
 var dataObj;
 var myTimer;
 var myTimer2;
+var arrayConstructor = [].constructor;
 //JSON GET
 function getData() {
-    $.get( "../getbids.php?a=1", function( data ) {
+    $.get( "../auction/getbids/"+auctionID, function( data ) {
        var newJSON = data;
-
-       var testJson = jQuery.parseJSON(newJSON);
+       if (newJSON.constructor === arrayConstructor) {
+         var testJson = newJSON;
+       } else {
+          var testJson = jQuery.parseJSON(newJSON);
+       }
        dataObj = testJson[0];
 
        updatePage();
@@ -37,7 +34,6 @@ function getData() {
     }, 2000);
 }
 
-getData();
 
 function moveClock(time){
     // $(".ring1").css('transition','transform 0s linear');
@@ -266,4 +262,17 @@ function leftNavHover(){
     if(pageNum==1){
         $(".navItem2").addClass('hover2');
     }
+}
+
+function newBid() {
+  $("#bidInput").css("display", "none");
+  $("#newBid").hide();
+  var formData = $("#newBid").serializeArray();
+  $("#loadingBid").show();
+  console.log($("#bidInput"));
+  $.post( "/auction/newbid", formData ,function( data ) {
+    $("#bidInput").css("display", "block");
+    $("#loadingBid").hide();
+    console.log(data);
+  });
 }
