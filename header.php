@@ -3,7 +3,6 @@
   	<title><?php echo $title; ?> | TENTT</title>
   	<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   	<script type='text/javascript' src="/templates/scripts.js"></script>
-    <script type='text/javascript' src='/forms.js'></script>
   	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 

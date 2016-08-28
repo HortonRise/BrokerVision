@@ -4,6 +4,29 @@ require_once("db.php");
 include "header.php";
 ?>
 
+<?php
+$query  = "SELECT auctions.auctionID, auctions.startDate
+            FROM auctions
+            WHERE ownerID = :id
+UNION ALL
+SELECT auctions.auctionID, auctions.startDate
+            FROM auctions
+            INNER JOIN members ON auctions.auctionID = members.auctionID
+            INNER JOIN property ON members.propertyID = property.propertyID
+            WHERE property.ownerID = :id
+            ";
+$params = array(
+    ':id' => $userID
+);
+$stmt   = $db->prepare($query);
+$stmt->execute($params);
+$running = $stmt->rowCount();
+if ($running > 0) {
+  $auctions = $stmt->fetchAll();
+}
+
+ ?>
+
 <div class="upcomingAuctions">
     <div class="container">
         <div class="clearfix">
@@ -12,7 +35,23 @@ include "header.php";
         <h2 class="auctionName">
             Upcoming Auctions
         </h2>
+
+        <?php foreach($auctions as $auction) {
+          $auctionID = $auction['auctionID'];
+          $query  = "SELECT *
+                      FROM members
+                      INNER JOIN property ON members.propertyID = property.propertyID
+                      WHERE members.auctionID = :id
+                      ";
+          $params = array(
+              ':id' => $auction['auctionID']
+          );
+          $stmt   = $db->prepare($query);
+          $stmt->execute($params);
+          $properties = $stmt->fetchAll();
+          ?>
         <div class="auctionBlock">
+
             <div class="auctionDateWrapper">
 
                 <img src="templates/css/assets/cal.png" class="calIcon"/>
@@ -20,66 +59,28 @@ include "header.php";
                     October 2nd 2016 | 3:30 PM
                 </p>
             </div>
+            <?php
+            foreach($properties as $p) {
+              ?>
+              <div class="propertyPreview">
+                  <img class="propertyPreviewImage" height='150'  src="<?php echo $p['thumbnail']; ?>" />
+                  <p class="buildingName">
+                      <?php echo $p['title']; ?>
+                  </p>
+              </div>
 
-            <div class="propertyPreview">
-                <img class="propertyPreviewImage" src="templates/css/assets/200SW.png" />
-                <p class="buildingName">
-                    200 South Wacker
-                </p>
-            </div>
-            <div class="propertyPreview">
-                <img class="propertyPreviewImage" src="templates/css/assets/200SW.png" />
-                <p class="buildingName">
-                    200 South Wacker
-                </p>
-            </div>
-            <div class="propertyPreview">
-                <img class="propertyPreviewImage" src="templates/css/assets/200SW.png" />
-                <p class="buildingName">
-                    200 South Wacker
-                </p>
-            </div>
+            <?php
+            }
+            ?>
 
-        <input type="submit" class="viewAuction" value="View Auction" />
+        <a href="/auction/<?php echo $auctionID ?>"> <input type="submit" class="viewAuction" value="View Auction" /></a>
 
         </div>
         <hr class="auctionListHR" />
-
-
-        <div class="auctionBlock">
-            <div class="auctionDateWrapper">
-
-                <img src="templates/css/assets/cal.png" class="calIcon"/>
-                <p class="auctionDateTime">
-                    October 3rd 2016 | 3:30 PM
-                </p>
-            </div>
-
-            <div class="propertyPreview">
-                <img class="propertyPreviewImage" src="templates/css/assets/200SW.png" />
-                <p class="buildingName">
-                    200 South Wacker
-                </p>
-            </div>
-            <div class="propertyPreview">
-                <img class="propertyPreviewImage" src="templates/css/assets/200SW.png" />
-                <p class="buildingName">
-                    200 South Wacker
-                </p>
-            </div>
-            <div class="propertyPreview">
-                <img class="propertyPreviewImage" src="templates/css/assets/200SW.png" />
-                <p class="buildingName">
-                    200 South Wacker
-                </p>
-            </div>
-
-        <input type="submit" class="viewAuction" value="View Auction" />
-
-        </div>
+        <?php }   ?>
     </div>
     <div class="spacer">
-        
+
     </div>
 </div>
 

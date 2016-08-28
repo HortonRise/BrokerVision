@@ -265,13 +265,12 @@ function leftNavHover(){
 }
 
 function newBid() {
-  $("#bidInput").css("display", "none");
-  $("#newBid").hide();
   var formData = $("#newBid").serializeArray();
+  $("#bidInput").hide();
   $("#loadingBid").show();
   console.log($("#bidInput"));
   $.post( "/auction/newbid", formData ,function( data ) {
-    $("#bidInput").css("display", "block");
+    $("#bidInput").show();
     $("#loadingBid").hide();
     console.log(data);
   });

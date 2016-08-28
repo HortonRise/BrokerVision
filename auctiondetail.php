@@ -143,7 +143,7 @@ if ($loggedIn) {
     </div>
     <div class="preferences">
       <div class="clientLogo">
-        <img src="http://3.bp.blogspot.com/-ZmGf_pig5HI/VM1CvAL2F9I/AAAAAAAA-1c/AGFW2g4QpCk/s1600/Gringotts%2Bbank.jpg" />
+        <img src="/templates/css/assets/bank.png" />
       </div>
       <div class="prefList">
         <ul>
