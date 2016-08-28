@@ -169,7 +169,23 @@ function tickDown(minutes, seconds){
 
 
 //VERTICAL BAR GRAPHS
-function updateGraph(graphVals, graphNum){
+function updateGraph(graphNum){
+
+    var currentObj;
+        if(graphNum==0){
+            currentObj = dataObj.price;
+        }else if(graphNum==1){
+            currentObj = dataObj.TI;
+        }else if(graphNum==2){
+            currentObj = dataObj.FR;
+        }else if(graphNum==3){
+            currentObj = dataObj.escalation;
+        }else{
+            currentObj = dataObj.term;
+        }
+
+    console.log(currentObj);
+
     for(var j=0; j<3;j++){
 
         var varClass = ".var" + graphNum;
@@ -177,16 +193,34 @@ function updateGraph(graphVals, graphNum){
         var valFullClass = varClass + ' .graph' + ' .barsWrapper' + ' .bar' + (j+1) + ' .barVal' + (j+1);
         var prefFullClass = varClass + ' .graph' + ' .pref';
         var prefFullValClass = varClass + ' .graph' + ' .pref .prefVal';
-        var transformedVal = (graphVals[j].pref*100) + "%";
+        var transformedVal = currentObj[j].percent;
+        console.log(transformedVal);
 
-        $(barFullClass).css('height', graphVals[j].perc);
-        $(valFullClass).html(graphVals[j].value);
-        $(prefFullClass).css('opacity', graphVals[j].pref);
-        $(prefFullValClass).html(transformedVal);
+        $(barFullClass).css('height', transformedVal);
+        $(valFullClass).html(currentObj[j].value);
+        //$(prefFullClass).css('opacity', currentObj[j].pref);
+        //$(prefFullValClass).html(transformedVal);
 
     };
 }
 
+// function updateGraph(graphVals, graphNum){
+//     for(var j=0; j<3;j++){
+//
+//         var varClass = ".var" + graphNum;
+//         var barFullClass = varClass + ' .graph' + ' .barsWrapper' + ' .bar' + (j+1);
+//         var valFullClass = varClass + ' .graph' + ' .barsWrapper' + ' .bar' + (j+1) + ' .barVal' + (j+1);
+//         var prefFullClass = varClass + ' .graph' + ' .pref';
+//         var prefFullValClass = varClass + ' .graph' + ' .pref .prefVal';
+//         var transformedVal = (graphVals[j].pref*100) + "%";
+//
+//         $(barFullClass).css('height', graphVals[j].perc);
+//         $(valFullClass).html(graphVals[j].value);
+//         $(prefFullClass).css('opacity', graphVals[j].pref);
+//         $(prefFullValClass).html(transformedVal);
+//
+//     };
+// }
 
 //TOP SUMMARY AND FACTS
 
@@ -198,13 +232,13 @@ function updateGraph(graphVals, graphNum){
 // barArray.push(value2c);
 // barArray.push(value3c);
 
-var barArray = [];
-var value1c = {value:0.0, cost:'$0.0m'};
-var value2c = {value:0.0, cost:'$0.0m'};
-var value3c = {value:0.0, cost:'$0.0m'};
-barArray.push(value1c);
-barArray.push(value2c);
-barArray.push(value3c);
+// var barArray = [];
+// var value1c = {value:0.0, cost:'$0.0m'};
+// var value2c = {value:0.0, cost:'$0.0m'};
+// var value3c = {value:0.0, cost:'$0.0m'};
+// barArray.push(value1c);
+// barArray.push(value2c);
+// barArray.push(value3c);
 
 
 
@@ -214,12 +248,16 @@ function updateBars(){
         var barWidth = (dataObj.score[k].value*10) + "%";
 
         var propId = ".propertyLine" + (k+1);
+        var propX = ".property" + (k+1);
+        var propNameId = propX + " .propertyName";
         var propImgWrapId = ".propertyImgWrapper" + (k+1);
         var propValWrapId = ".propertyValueWrapper" + (k+1);
         var propValId = propValWrapId + " .propertyValue" + (k+1);
 
         var totalValue = dataObj.netvalue[k].value;
+        var propNameData = dataObj.score[k].title;
 
+        $(propNameId).html(propNameData);
         $(propValId).html(totalValue);
         $(propId).css('width', barWidth);
         $(propImgWrapId).css('left', barWidth);
@@ -241,26 +279,42 @@ function updateBars(){
 //         $(propValWrapId).css('left', barWidth);
 //     }
 // }
+// function updateFacts(barVals){
+//     for(var l=0; l<3;l++){
+//
+//         var propFactId = ".propStat" + (l+1);
+//         var propFactNumId = propFactId + " .propFact1 .factNum";
+//         var propFact2NumId = propFactId + " .propFact2 .factNum";
+//
+//         $(propFactNumId).html(barVals[l].value);
+//         $(propFact2NumId).html(barVals[l].cost);
+//
+//     }
+// }
 
-function updateFacts(barVals){
+
+function updateFacts(){
     for(var l=0; l<3;l++){
 
         var propFactId = ".propStat" + (l+1);
         var propFactNumId = propFactId + " .propFact1 .factNum";
         var propFact2NumId = propFactId + " .propFact2 .factNum";
 
-        $(propFactNumId).html(barVals[l].value);
-        $(propFact2NumId).html(barVals[l].cost);
+        $(propFactNumId).html(dataObj.score[l].value);
+        $(propFact2NumId).html(dataObj.netvalue[l].tinyV);
 
     }
 }
 
 function updatePage(){
-    console.log(dataObj.score[1]);
+
     updateBars();
-    // for(var m; m<dataObj.score.length; m++){
-    //
-    // }
+    updateFacts();
+    console.log(dataObj.price);
+    for(var m=0; m<5; m++){
+        console.log(m);
+        updateGraph(m);
+    }
 
 
 }
