@@ -1,10 +1,11 @@
 $( document ).ready(function() {
-
     getData();
-
+    leftNavHover();
     setTimeout(function(){
+
         updatePage();
     }, 2000);
+
 
     // setTimeout(function(){
     //     adjustClock();
@@ -197,7 +198,7 @@ function updateFacts(){
 
         var propNameAndSq = propFactId + " .propName";
 
-        $(propNameAndSq).html(dataObj.score[l].title + "<span style='font-weight:300;font-size:13px;'>  &#124;  " + dataObj.score[l].title + "</span>")
+        $(propNameAndSq).html(dataObj.score[l].title + "<span style='font-weight:300;font-size:13px;'>  &#124;  " + dataObj.sqft[l] + " sq ft.</span>")
 
         $(propFactNumId).html(dataObj.score[l].value);
         $(propFact2NumId).html(dataObj.netvalue[l].tinyV);
@@ -248,8 +249,25 @@ function updatePage(){
 
 function adjustClock (){
     $('.ring1').css('opacity', '1');
-    moveClock(6000);
-    displayClock(6000);
+    moveClock(10000);
+    displayClock(10000);
+}
+
+function navHover() {
+    for(var d=0;d<4;d++){
+        var navClass = ".navItem" + d;
+        $(navClass).hover(function(){
+
+        })
+    }
+
+}
+
+var pageNum = 1;
+function leftNavHover(){
+    if(pageNum==1){
+        $(".navItem2").addClass('hover2');
+    }
 }
 
 function newBid() {
