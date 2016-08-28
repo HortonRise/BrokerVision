@@ -1,5 +1,5 @@
-
 <?php
+session_start();
 include_once "db.php";
 include "netval.php";
 
@@ -190,7 +190,7 @@ if (isset($_GET['a'])) {
             "sqft" => $sqft,
             "lastUpdate" => $lastUpdate
         );
-        header('Content-Type: application/json');
+        //header('Content-Type: application/json');
         echo json_encode($results, JSON_PRETTY_PRINT);
 
 
