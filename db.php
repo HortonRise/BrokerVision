@@ -10,7 +10,7 @@ session_start();
 if ($_POST['email']) {
   $wrong = false;
   $passHash = md5($_POST['password']);
-  $query  = "SELECT userID, email, password, first_name, last_name
+  $query  = "SELECT userID, email, password, first_name, last_name, type
               FROM users
               WHERE email = :email
               ";
@@ -27,6 +27,7 @@ if ($_POST['email']) {
     $_SESSION['userID'] = $userID;
     $_SESSION['first_name'] = $row['first_name'];
     $_SESSION['last_name'] = $row['last_name'];
+    $_SESSION['type'] = $row['type'];
   } else {
     $loggedIn = false;
     $wrong = true;

@@ -19,9 +19,11 @@ if ($loggedIn) {
   if ($listings > 0) {
     $properties = $stmt->fetchAll();
     echo "<h2>Your Properties</h2>";
+    echo "<ul>";
     foreach ($properties as $property) {
-      echo "Property #" . $property['propertyID'] . "<br />";
+      echo "<li>Property #" . $property['propertyID'] . "<span><a class='button' href='/property/" . $property['propertyID'] . "'>View</a></span></li>";
     }
+    echo "</ul>";
   } else {
 ?>
   You have no properties to show.

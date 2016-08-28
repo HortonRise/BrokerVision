@@ -18,6 +18,7 @@ if ($loggedIn) {
   $stmt->execute($params);
   $property = $stmt->fetch();
   echo "<h2>" . $property['title']  ."</h2>";
+
 ?>
 
 

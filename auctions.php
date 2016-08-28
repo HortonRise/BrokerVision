@@ -27,7 +27,7 @@ if ($loggedIn) {
     echo "<h2>Your Upcoming Property Auctions</h2>";
     echo "<ul>";
     foreach ($auctions as $auction) {
-      echo "<li><span>Auction #" . $auction['auctionID'] . "</span><span>" .  $auction['endDate']  . "</span><span><a href='/auction/". $auction['auctionID'] . "'>View</a></span></li>";
+      echo "<li><span>Auction #" . $auction['auctionID'] . "</span><span>" .  $auction['endDate']  . "</span><span><a class='button' href='/auction/". $auction['auctionID'] . "'>View</a></span></li>";
     }
     echo "</ul>";
   }
@@ -51,7 +51,7 @@ if ($loggedIn) {
     $auctions = $stmt->fetchAll();
     foreach ($auctions as $auction) {
 
-      echo "<li><span>Property #" . $auction['propertyID'] . " - " . $auction['property.title'] . "</span><span>" .  $auction['endDate']  . "</span><span><a href='/auction/". $auction['auctionID'] . "'>View</a></span></li>";
+      echo "<li><span>Property #" . $auction['propertyID'] . " - " . $auction['property.title'] . "</span><span>" .  $auction['endDate']  . "</span><span><a class='button' href='/auction/". $auction['auctionID'] . "'>View</a></span></li>";
     }
     echo "</ul>";
   }
