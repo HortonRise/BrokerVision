@@ -19,12 +19,16 @@ $( document ).ready(function() {
 var dataObj;
 var myTimer;
 var myTimer2;
+var arrayConstructor = [].constructor;
 //JSON GET
 function getData() {
     $.get( "../getbids.php?a=1", function( data ) {
        var newJSON = data;
-
-       var testJson = jQuery.parseJSON(newJSON);
+       if (newJSON.constructor === arrayConstructor) {
+         var testJson = newJSON;
+       } else {
+          var testJson = jQuery.parseJSON(newJSON);
+       }
        dataObj = testJson[0];
 
        updatePage();
