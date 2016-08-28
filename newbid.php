@@ -38,6 +38,19 @@ if ( $loggedIn and isset($_POST['memberID']) ) {
 
     //UPDATE lastUpdate field
     $newTS = date("Y-m-d h:i:s");
+
+    $query  = "UPDATE members
+              SET updateTS = :ts
+              WHERE memberID = :id
+            ";
+
+    $params = array(
+        ':id' => $id,
+        ':ts' => $newTS
+    );
+    $stmt   = $db->prepare($query);
+    $stmt->execute($params);
+
     $query  = "UPDATE auctions
               SET lastUpdate = :ts
               WHERE auctionID = :id
@@ -49,6 +62,7 @@ if ( $loggedIn and isset($_POST['memberID']) ) {
     );
     $stmt   = $db->prepare($query);
     $stmt->execute($params);
+
 
   } else {
     echo "Not authorized";

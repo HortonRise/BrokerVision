@@ -25,14 +25,44 @@ if ($loggedIn) {
   if ($running > 0) {
     $auctions = $stmt->fetchAll();
     echo "<h2>Your Upcoming Property Auctions</h2>";
-    echo "<ul>";
     foreach ($auctions as $auction) {
-      echo "<li><span>Auction #" . $auction['auctionID'] . "</span><span>" .  $auction['endDate']  . "</span><span><a class='button' href='/auction/". $auction['auctionID'] . "'>View</a></span></li>";
+      ?>
+      <div class='auction'>
+        <div class='auctionDate'>
+          <?php echo $auction['startDate']; ?>
+        </div>
+        <div class='auctionLabel'>
+          <?php echo $auction['title']; ?>
+        </div>
+
+        <?php
+                $query  = "SELECT *
+                            FROM members
+                            INNER JOIN property ON members.propertyID = property.propertyID
+                            WHERE members.auctionID = :id
+                            ";
+                $params = array(
+                    ':id' => $auction['auctionID']
+                );
+                $stmt   = $db->prepare($query);
+                $stmt->execute($params);
+                $properties = $stmt->fetchAll();
+                foreach($properties as $p) {
+                  echo "<img height='150' src='" . $p['thumbnail'] . "'  />'";
+                }
+         ?>
+        <div>
+          <a class='button' href='/auction/<?php echo$auction['auctionID']; ?>'>View</a>
+        </div>
+      </div>
+      <?php
     }
     echo "</ul>";
   }
+
+
   //look up upcoming auctions that they're PARTICIPATING in
-  $query  = "SELECT auctions.auctionID, auctions.endDate, property.title, property.propertyID
+  $query  = "SELECT auctions.auctionID, auctions.startDate, property.title, property.propertyID
               FROM auctions
               INNER JOIN members ON auctions.auctionID = members.auctionID
               INNER JOIN property ON members.propertyID = property.propertyID
@@ -47,13 +77,39 @@ if ($loggedIn) {
 
   if ($participating  > 0) {
     echo "<h2>Property You're Selling</h2>";
-    echo "<ul>";
     $auctions = $stmt->fetchAll();
     foreach ($auctions as $auction) {
+      ?>
+      <div class='auction'>
+        <div class='auctionDate'>
+          <?php echo $auction['startDate']; ?>
+        </div>
+        <div class='auctionLabel'>
+          <?php echo $auction['title']; ?>
+        </div>
 
-      echo "<li><span>Property #" . $auction['propertyID'] . " - " . $auction['property.title'] . "</span><span>" .  $auction['endDate']  . "</span><span><a class='button' href='/auction/". $auction['auctionID'] . "'>View</a></span></li>";
+        <?php
+                $query  = "SELECT *
+                            FROM members
+                            INNER JOIN property ON members.propertyID = property.propertyID
+                            WHERE members.auctionID = :id
+                            ";
+                $params = array(
+                    ':id' => $auction['auctionID']
+                );
+                $stmt   = $db->prepare($query);
+                $stmt->execute($params);
+                $properties = $stmt->fetchAll();
+                foreach($properties as $p) {
+                  echo $p['title'];
+                }
+         ?>
+        <div>
+          <a class='button' href='/auction/". $auction['auctionID'] . "'>View</a>
+        </div>
+      </div>
+      <?php
     }
-    echo "</ul>";
   }
 
   if ($running == 0 && $participating == 0) {

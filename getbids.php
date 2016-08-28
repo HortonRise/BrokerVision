@@ -76,6 +76,7 @@ if (isset($_GET['a'])) {
 
         $bids = $stmt->fetchAll();
         foreach ($bids as $bid) {
+            $sqft[] = $bid['sqft'];
             $price[]      = Array(
                 "property" => $bid['propertyID'],
                 "title" => $bid['title'],
@@ -186,6 +187,7 @@ if (isset($_GET['a'])) {
             "score" => $score,
             "netvalue" => $netvalue,
             "weights" => $weights,
+            "sqft" => $sqft,
             "lastUpdate" => $lastUpdate
         );
         header('Content-Type: application/json');
