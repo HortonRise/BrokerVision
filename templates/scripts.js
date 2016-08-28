@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 
-
+    getData();
 
     setTimeout(function(){
         updatePage();
@@ -22,7 +22,7 @@ var myTimer2;
 var arrayConstructor = [].constructor;
 //JSON GET
 function getData() {
-    $.get( "../getbids.php?a=1", function( data ) {
+    $.get( "../auction/getbids/"+auctionID, function( data ) {
        var newJSON = data;
        if (newJSON.constructor === arrayConstructor) {
          var testJson = newJSON;
@@ -39,7 +39,6 @@ function getData() {
     }, 2000);
 }
 
-getData();
 
 function moveClock(time){
     // $(".ring1").css('transition','transform 0s linear');
@@ -251,4 +250,17 @@ function adjustClock (){
     $('.ring1').css('opacity', '1');
     moveClock(6000);
     displayClock(6000);
+}
+
+function newBid() {
+  $("#bidInput").css("display", "none");
+  $("#newBid").hide();
+  var formData = $("#newBid").serializeArray();
+  $("#loadingBid").show();
+  console.log($("#bidInput"));
+  $.post( "/auction/newbid", formData ,function( data ) {
+    $("#bidInput").css("display", "block");
+    $("#loadingBid").hide();
+    console.log(data);
+  });
 }
