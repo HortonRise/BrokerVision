@@ -89,10 +89,16 @@ if (isset($_GET['a'])) {
                 "value" => $bid['term']
             );
             $v = netValue($bid['price'], $bid['term'], $bid['sqft'], $bid['TI'], $bid['FR'], $bid['esc']);
+            if ($v > 1000000) {
+              $tinyV = "$" . Round($v / 1000000, 1) . "M";
+            } else {
+              $tinyV = "$" . Round($v / 1000, 1) . "K";
+            }
             $netvalue[] = Array(
                 "property" => $bid['propertyID'],
                 "title" => $bid['title'],
-                "value" => $v
+                "value" => "$" . number_format($v),
+                "tinyV" => $tinyV
             );
 
         }

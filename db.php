@@ -25,6 +25,8 @@ if ($_POST['email']) {
     $loggedIn = true;
     $userID = $row['userID'];
     $_SESSION['userID'] = $userID;
+    $_SESSION['first_name'] = $row['first_name'];
+    $_SESSION['last_name'] = $row['last_name'];
   } else {
     $loggedIn = false;
     $wrong = true;

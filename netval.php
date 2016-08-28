@@ -25,7 +25,7 @@ function netValue($price, $years, $sqft, $TI, $FR, $esc) {
     $npv += $n;
     $currentPrice *=  1 + ($esc / 100);
   }
-  return Round($npv, 0);
+  return Round($npv/$years, 0);
 }
 
 
