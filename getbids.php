@@ -25,10 +25,6 @@ function minKey($key, $array)
     return $min;
 }
 
-
-
-
-
 if (isset($_GET['a'])) {
     $id     = $_GET['a'];
     $query  = "SELECT * FROM auctions WHERE auctionID = :id";
@@ -38,6 +34,23 @@ if (isset($_GET['a'])) {
     $stmt   = $db->prepare($query);
     $stmt->execute($params);
     $auctionData = $stmt->fetch();
+
+    //Set up Weighted Scores
+    $priceWeight      = $auctionData["priceWeight"] / 10;
+    $TIWeight         = $auctionData["TIWeight"] / 10;
+    $FRWeight         = $auctionData["FRWeight"] / 10;
+    $escalationWeight = $auctionData["escalationWeight"] / 10;
+    $termWeight       = $auctionData["termWeight"] / 10;
+
+    $weights = Array(
+              "price" => $auctionData["priceWeight"] / 100,
+              "TI" => $auctionData["TIWeight"] / 100,
+              "FR" => $auctionData["FRWeight"] / 100,
+              "escalation" => $auctionData["escalationWeight"] / 100,
+              "term" => $auctionData["termWeight"] / 100,
+    );
+
+    $maxScore = $priceWeight + $TIWeight + $FRWeight + $escalationWeight + $termWeight;
 
     //Pull out the most up to date bids for a specified auction
     $query  = "SELECT topBid.currentBid, auctions.auctionID, property.sqft, property.propertyID, property.title, bids.price, bids.TI, bids.FR, bids.escalation, bids.term
@@ -66,27 +79,32 @@ if (isset($_GET['a'])) {
             $price[]      = Array(
                 "property" => $bid['propertyID'],
                 "title" => $bid['title'],
-                "value" => $bid['price']
+                "value" => $bid['price'],
+                "weight" => $weights['price']
             );
             $TI[]         = Array(
                 "property" => $bid['propertyID'],
                 "title" => $bid['title'],
-                "value" => $bid['TI']
+                "value" => $bid['TI'],
+                "weight" => $weights['TI']
             );
             $FR[]         = Array(
                 "property" => $bid['propertyID'],
                 "title" => $bid['title'],
-                "value" => $bid['FR']
+                "value" => $bid['FR'],
+                "weight" => $weights['FR']
             );
             $escalation[] = Array(
                 "property" => $bid['propertyID'],
                 "title" => $bid['title'],
-                "value" => $bid['escalation']
+                "value" => $bid['escalation'],
+                "weight" => $weights['escalation']
             );
             $term[]       = Array(
                 "property" => $bid['propertyID'],
                 "title" => $bid['title'],
-                "value" => $bid['term']
+                "value" => $bid['term'],
+                "weight" => $weights['term']
             );
             $v = netValue($bid['price'], $bid['term'], $bid['sqft'], $bid['TI'], $bid['FR'], $bid['esc']);
             if ($v > 1000000) {
@@ -108,22 +126,6 @@ if (isset($_GET['a'])) {
         $minEscalation = minKey("value", $escalation);
         $minTerm       = minKey("value", $term);
 
-        //Set up Weighted Scores
-        $priceWeight      = $auctionData["priceWeight"] / 10;
-        $TIWeight         = $auctionData["TIWeight"] / 10;
-        $FRWeight         = $auctionData["FRWeight"] / 10;
-        $escalationWeight = $auctionData["escalationWeight"] / 10;
-        $termWeight       = $auctionData["termWeight"] / 10;
-
-        $weights = Array(
-                  "price" => $auctionData["priceWeight"] / 100,
-                  "TI" => $auctionData["TIWeight"] / 100,
-                  "FR" => $auctionData["FRWeight"] / 100,
-                  "escalation" => $auctionData["escalationWeight"] / 100,
-                  "term" => $auctionData["termWeight"] / 100,
-        );
-
-        $maxScore = $priceWeight + $TIWeight + $FRWeight + $escalationWeight + $termWeight;
 
         //Calculate the percentage based off the BEST score of the group
         $i = 0;

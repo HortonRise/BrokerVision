@@ -1,10 +1,10 @@
 
 <?php
-
 function netValue($price, $years, $sqft, $TI, $FR, $esc) {
-  //echo $price;
-
-  $dr = .06;
+  /*
+  Calculates the Annual Cost of a Property Investment based on the NPV
+  */
+  $dr = .06;  //interest ratio of present dollars
   $value = 0;
   $npv = 0;
   $currentPrice = $price;
@@ -19,17 +19,10 @@ function netValue($price, $years, $sqft, $TI, $FR, $esc) {
     }
     //calculate the NPV of the rent
     $n = $rent / pow(1.06, $i);
-    //echo "Year " . $i . " $" . Round($rent, 0) . " / NPV $" . Round($n, 0) . "<br />";
-    $value += $rent;
-
     $npv += $n;
+    $value += $rent;
     $currentPrice *=  1 + ($esc / 100);
   }
   return Round($npv/$years, 0);
 }
-
-
-//echo netValue(10.00, 10, 100000, 1, 4, 4);
-
-
 ?>
