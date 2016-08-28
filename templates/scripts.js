@@ -194,7 +194,7 @@ function updateFacts(){
 
         var propNameAndSq = propFactId + " .propName";
 
-        $(propNameAndSq).html(dataObj.score[l].title + "<span style='font-weight:300;font-size:13px;'>  &#124;  " + dataObj.score[l].title + " sq ft.</span>")
+        $(propNameAndSq).html(dataObj.score[l].title + "<span style='font-weight:300;font-size:13px;'>  &#124;  " + dataObj.sqft[l] + " sq ft.</span>")
 
         $(propFactNumId).html(dataObj.score[l].value);
         $(propFact2NumId).html(dataObj.netvalue[l].tinyV);
