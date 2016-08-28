@@ -76,7 +76,7 @@ if (isset($_GET['a'])) {
 
         $bids = $stmt->fetchAll();
         foreach ($bids as $bid) {
-            $sqft[] = $bid['sqft'];
+            $sqft[] = number_format($bid['sqft']);
             $price[]      = Array(
                 "property" => $bid['propertyID'],
                 "title" => $bid['title'],
