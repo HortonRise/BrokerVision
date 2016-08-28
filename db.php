@@ -3,7 +3,7 @@
 $username="root";
 $password="root";
 $database="brokervision";
-
+date_default_timezone_set('America/Chicago');
 $db = new PDO('mysql:host=localhost;dbname=' . $database .';charset=utf8', $username, $password);
 session_start();
 //check if they're trying to log in
