@@ -245,6 +245,6 @@ function updatePage(){
 
 function adjustClock (){
     $('.ring1').css('opacity', '1');
-    moveClock(6000);
-    displayClock(6000);
+    moveClock(10000);
+    displayClock(10000);
 }
