@@ -1,0 +1,19 @@
+{
+  "name": "tw",
+  "version": "1.0.0",
+  "description": "tw",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HortonRise/BrokerVision.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HortonRise/BrokerVision/issues"
+  },
+  "homepage": "https://github.com/HortonRise/BrokerVision#readme"
+}
