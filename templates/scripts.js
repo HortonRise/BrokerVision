@@ -1,6 +1,10 @@
 $( document ).ready(function() {
   if (typeof auctionID !== 'undefined') {
-    getData();
+
+    setTimeout(function(){
+        getData();
+    }, 500);
+
     leftNavHover();
     setTimeout(function(){
 
@@ -243,8 +247,8 @@ function updatePage(){
 
 function adjustClock (){
     $('.ring1').css('opacity', '1');
-    moveClock(10000);
-    displayClock(10000);
+    moveClock(120000);
+    displayClock(120000);
 }
 
 function navHover() {
