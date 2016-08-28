@@ -105,7 +105,7 @@ if ($loggedIn) {
                 }
          ?>
         <div>
-          <a class='button' href='/auction/". $auction['auctionID'] . "'>View</a>
+          <a class='button' href='/auction/<?php echo $auction['auctionID']; ?>'>View</a>
         </div>
       </div>
       <?php
