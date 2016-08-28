@@ -1,0 +1,276 @@
+body
+    background-color #0277C2
+    font-family sans-serif
+
+.barLabels
+    width 30%
+    min-width 200px
+    display inline-block
+    height 600px
+    position relative
+    margin-top 40px
+    margin-left 40px
+    text-align right
+    vertical-align top
+    p
+        color white
+
+.barLabel
+    margin 0
+    margin-top 10px
+
+.barLabelWrapper
+    width 100%
+    height 36px
+    margin-bottom 10px
+    vertical-align top
+    display block
+
+
+.bars
+    width 40%
+    display inline-block
+    height 600px
+    position relative
+    margin-top 40px
+    margin-left 20px
+
+.bar
+    width 100%
+    height 36px
+    margin-bottom 10px
+
+.pref
+    width 20%
+    height 100%
+    border-radius 4px
+    background-color #ffffff
+    opacity .5
+    display inline-block
+    position relative
+    transition width 1s ease-in-out
+
+// .prefLabel
+//     width 100%
+//     // height 100%
+//     text-align right
+//     position absolute
+//     right 0
+//     margin-right 6px
+//     // margin 0
+//     p
+//         font-size 16px
+//         color #0277C2
+//         line-height 0
+//         // margin 0
+.prefLabel
+    width 100%
+    // height 100%
+    text-align center
+    position absolute
+    margin-top 3px
+    // right 0
+    // margin-right 6px
+    // margin 0
+    p
+        font-size 16px
+        color #0277C2
+        line-height 0
+        // margin 0
+
+.val
+    width 30%
+    height 100%
+    border-radius 4px
+    background-color #ffffff
+    opacity .8
+    //margin-left 6px
+    display inline-block
+    position relative
+    transition width 1s ease-in-out
+
+.valLabel
+    width 90%
+    // height 100%
+    text-align right
+    position absolute
+    margin-top 3px
+    right 0
+    margin-right 6px
+    // margin 0
+    p
+        font-size 16px
+        color #0277C2
+        line-height 0
+        // margin 0
+
+.unitWrapper
+    width 30%
+    height 100%
+    border-radius 4px
+    //background-color #ffffff
+    //opacity .8
+    //margin-left 6px
+    display inline-block
+    position relative
+    //transition width 1s ease-in-out
+    // height 100%
+    // display inline-block
+    // width 100px
+
+.unit
+    display inline-block
+    height 100%
+    p
+        color white
+        height 100%
+        line-height 0
+        margin 0
+
+
+///////
+///////
+/////// Property Lines Module
+///////
+///////
+
+.properties
+    width 80%
+    margin 0px auto
+    margin-top 24px
+    display block
+    position relative
+    height 600px
+    //background-color #ddddff
+
+.property
+    width 100%
+    margin-bottom 30px
+    display block
+    position relative
+    height 60px
+
+.propertyLine
+    width 30%
+    height 6px
+    position absolute
+    top 50%
+    margin-top -3px
+    background-color white
+    opacity .6
+    border-radius 3px 0 0 3px
+    transition width 1s ease-in-out
+
+.propertyImgWrapper
+    display block
+    width 60px
+    height 60px
+    border-radius 50%
+    background-color white
+    position absolute
+    left 30%
+    top 50%
+    margin-top -30px
+    margin-left -2px
+    transition left 1s ease-in-out
+
+.propertyImg
+    display block
+    width 52px
+    height 52px
+    border-radius 50%
+    //background-color red
+    margin-left 4px
+    margin-top 4px
+
+#propertyImg1
+    background-image url('http://www.chicagoarchitecture.info/Images/TheLoop/1SouthWacker-003.jpg')
+    background-size cover
+
+#propertyImg2
+    background-image url('http://www3.jjc.edu/ftp/wdc13/rturza/pictures/Sears_Tower.jpg')
+    background-size cover
+
+#propertyImg3
+    background-image url('https://media-cdn.tripadvisor.com/media/photo-p/0a/e4/e6/12/exterior-night.jpg')
+    background-size cover
+
+
+///////
+///////
+/////// Clock Module
+///////
+///////
+
+.clock
+    width 140px
+    height 140px
+    display block
+    margin-left 30px
+    margin-top 30px
+    position relative
+
+.ringWrapper
+    width 100%
+    height 100%
+    display block
+    position relative
+    // -webkit-clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);
+    // clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);
+
+
+.mask1, .mask2
+    width 50%
+    height 100%
+    display block
+    background-color #0277C2
+
+.mask1
+    z-index 10
+    position absolute
+    left 0
+    top 0
+
+
+
+
+.ring1, .ring2
+    width 120px
+    height 120px
+    border 10px white solid
+    border-radius 50%
+    transition all 1s linear
+    position absolute
+    left 0
+    top 0
+    -webkit-clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);
+
+.ring1
+    transform rotate(0deg)
+
+.ring2
+    transform rotate(180deg)
+    opacity 0
+
+.clockDisplay
+    position absolute
+    width 100%
+    height 100%
+    top 0
+    margin-top -25px
+    text-align center
+    z-index 15
+
+.clockNums
+    position absolute
+    width 100%
+    height 50px
+    top 50%
+    margin-top -22px
+    text-align center
+
+.clockNumbers
+    color white
+    font-size 28px
+    font-weight bold
