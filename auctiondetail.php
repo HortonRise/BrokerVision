@@ -148,19 +148,19 @@ if ($loggedIn) {
       <div class="prefList">
         <ul>
           <li class='priorityPref' id="li1">
-            1. Rate
+            1. Price Per Square Foot
           </li>
           <li id="li2">
-            2. Tenant Improvements
+            2. Term
           </li>
           <li id="li3">
             3. Free Rent
           </li>
           <li id="li4">
-            4. Escalation
+            4. Tenant Improvement
           </li>
           <li id="li5">
-            5. Term
+            5. Escalation
           </li>
 
         </ul>
@@ -245,7 +245,7 @@ if ($loggedIn) {
           <div class="var var1">
               <div class="varNameDiv varNameDiv0">
                   <p class="varName varName0">
-                      Price Per Square Foot
+                      Price Per Square Foot ($/sq-ft)
                   </p>
               </div>
               <div class="graph graph1">
@@ -278,7 +278,7 @@ if ($loggedIn) {
           <div class="var var2">
               <div class="varNameDiv varNameDiv1">
                   <p class="varName varName1">
-                      Tenant Improvement
+                      Tenant Improvement ($/sq-ft)
                   </p>
               </div>
               <div class="graph graph1">
@@ -344,7 +344,7 @@ if ($loggedIn) {
           <div class="var var4">
               <div class="varNameDiv varNameDiv1">
                   <p class="varName varName1">
-                      Escalation
+                      Escalation (%/yr)
                   </p>
               </div>
               <div class="graph graph1">

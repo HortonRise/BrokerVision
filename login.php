@@ -41,7 +41,7 @@ require_once("db.php");
 
         <form action="/login" method="post">
  				<input type="text" name='email' id='loginEmail' placeholder="Email" />
- 				<input type="text" name='password' id='loginPassword' placeholder="Password" />
+ 				<input type="password" name='password' id='loginPassword' placeholder="Password" />
  				<input type="submit" name="submit" id="submit" value="Log In" />
         </form>
         <?php } ?>

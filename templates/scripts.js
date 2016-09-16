@@ -247,8 +247,8 @@ function updatePage(){
 
 function adjustClock (){
     $('.ring1').css('opacity', '1');
-    moveClock(120000);
-    displayClock(120000);
+    moveClock(1200000);
+    displayClock(1200000);
 }
 
 function navHover() {
